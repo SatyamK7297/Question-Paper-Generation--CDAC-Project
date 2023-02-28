@@ -1,0 +1,27 @@
+package com.app.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+public class Question extends BaseEntity{
+    
+	@Column(nullable = false, columnDefinition = "TEXT")
+	
+	private String question; 
+	
+	private String A;
+	
+	private String B;
+	
+	private String C;
+	
+	private String D;
+	
+	
+	private String answer;
+	
+	private Subject subject;
+}
