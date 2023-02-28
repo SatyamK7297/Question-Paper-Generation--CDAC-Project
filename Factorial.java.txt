@@ -13,4 +13,5 @@ public class Factorial {
 
         System.out.println("The factorial of " + n + " is " + factorial);
     }
+	System.out.println("Git push");
 }
