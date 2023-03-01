@@ -1,0 +1,7 @@
+package com.app.repository;
+
+import com.app.pojos.Question;
+
+public class QuestionRepository extends JpaRepository<Question,Long>{
+
+}

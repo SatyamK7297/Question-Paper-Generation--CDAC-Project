@@ -1,0 +1,22 @@
+package com.app.services;
+
+import java.util.List;
+
+import com.app.pojos.Question;
+import com.app.pojos.Subject;
+
+public class QuestionServiceImpl implements QuestionService {
+
+	@Override
+	public void addQuestion(Subject subject, Question question) {
+		
+
+	}
+
+	@Override
+	public List<Question> getAllQuestion() {
+		
+		return null;
+	}
+
+}
