@@ -38,7 +38,6 @@ public class Course extends BaseEntity{
 	}
 
 	public List<Subject> getSubjects() {
-		System.out.println(subjects);
 		return subjects;
 	}
 

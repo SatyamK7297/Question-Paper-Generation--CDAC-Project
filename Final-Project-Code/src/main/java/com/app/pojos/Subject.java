@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-
 public class Subject extends BaseEntity{
 
 	public Subject() {
@@ -34,8 +33,9 @@ public class Subject extends BaseEntity{
 	public List<Question> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+	public void setQuestions(Question question) {
+		question.setSubject(this);
+		this.questions.add(question);
 	}
 	public Subject(String subjectName, Course course, List<Question> questions) {
 		super();
@@ -47,6 +47,7 @@ public class Subject extends BaseEntity{
 	private String subjectName;
 	@ManyToOne
 	@JoinColumn(name="course_id")
+	@JsonIgnore
 	private Course course;
 	@OneToMany(mappedBy="subject",cascade=CascadeType.ALL,orphanRemoval=true)
 	@JsonIgnore

@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,5 +36,6 @@ public class Question extends BaseEntity{
 	private String answer;
 	@ManyToOne
 	@JoinColumn(name="subject_id")
+	@JsonIgnore
 	Subject subject;
 }

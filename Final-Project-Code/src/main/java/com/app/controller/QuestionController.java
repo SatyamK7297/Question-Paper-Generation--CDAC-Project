@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.pojos.Subject;
-import com.app.service.SubjectService;
+import com.app.pojos.Question;
+import com.app.service.QuestionService;
 
 @RestController
-@RequestMapping("/course/subject")
-public class SubjectController {
+@RequestMapping("/course/subject/question")
+public class QuestionController {
 
 	@Autowired
-	private SubjectService subjectService;
+	private QuestionService questionService;
 	
-	public SubjectController() {
+	public QuestionController() {
 		System.out.println("in def ctor "+getClass());
 	}
 	
-	@GetMapping("/{courseId}")
-	public List<Subject> getSubject(@PathVariable Long courseId){
-		return subjectService.getSubject(courseId);
-	}
+	@GetMapping("/{subjectId}")
+	public List<Question> getQuestion(@PathVariable Long subjectId){
+		return questionService.getQuestion(subjectId);
+	} 
 	
-	@PostMapping("/{courseId}")
-	public void addSubject(@PathVariable Long courseId, @RequestBody Subject subject) {
-		subjectService.addSubject(courseId, subject);
+	@PostMapping("/{subjectId}")
+	public void addQuestion(@PathVariable Long subjectId, @RequestBody Question question) {
+		questionService.addQuestion(subjectId, question);
 	}
 }
