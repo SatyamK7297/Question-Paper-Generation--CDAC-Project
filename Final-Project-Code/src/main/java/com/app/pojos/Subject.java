@@ -23,6 +23,7 @@ public class Subject extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="Course_ID")
+	@JsonIgnore
 	private Course course;
 	
 	@OneToMany(mappedBy="subject", cascade=CascadeType.ALL,orphanRemoval=true)
@@ -31,16 +32,7 @@ public class Subject extends BaseEntity {
 	
 	
 
-	public Subject() {
-		
-	}
-
-	public Subject(String subjectName, Course course, List<Question> questions) {
-		super();
-		this.subjectName = subjectName;
-		this.course = course;
-		this.questions = questions;
-	}
+	
 
 	public String getSubjectName() {
 		return subjectName;
@@ -62,8 +54,9 @@ public class Subject extends BaseEntity {
 		return questions;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+	public void setQuestions(Question quest) {
+		questions.add(quest);
+		quest.setSubject(this);
 	}
 	
 	

@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,23 +36,11 @@ public class Question extends BaseEntity {
 	@Column(name="answer",nullable=false)
 	private String answer;
 	
-	public Question() {
-		
-	}
-
-	public Question(String question, String a, String b, String c, String d, String answer, Subject subject) {
-		super();
-		this.question = question;
-		A = a;
-		B = b;
-		C = c;
-		D = d;
-		this.answer = answer;
-		this.subject = subject;
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name="Subject_ID")
+	@JsonIgnore
 	private Subject subject;
 
 	public String getQuestion() {
@@ -109,7 +99,15 @@ public class Question extends BaseEntity {
 		this.subject = subject;
 	} 
 	
-	
+//	{
+//        "question": "Who invented Java Programming",
+//        "answer": "James Gosling",
+//      
+//        "c": "Guido Van Rossum",
+//        "d": "James Gosling",
+//        "a": "Dennis Ritchie",
+//        "b": "bjarne stroustrup"
+//    }
 	
 	
 }

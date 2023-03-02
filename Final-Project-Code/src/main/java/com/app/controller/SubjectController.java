@@ -26,12 +26,12 @@ public class SubjectController {
 		subjectService.addSubject(courseId,subject);
 		
 	}
+	
 	@GetMapping("/{courseId}")
 	public List<Subject> getAllSubject(@PathVariable Long courseId){
+		
 		System.out.println(courseId);
 		return subjectService.getSubject(courseId);
 	}
-	
-	
-	
+		
 }

@@ -25,8 +25,8 @@ public class SubjectServiceImpl implements SubjectService {
 	public void addSubject(Long courseId, Subject subject) {
 	
 	 Course course     =  courseRepo.findById(courseId).orElseThrow(() -> new ResourceNotFoundException("Invalid Category Id!!!"));;
-	 subject.setCourse(course);
-		subjectRepo.save(subject);
+	 course.setSubjects(subject);
+		
 		
 		
 	}
