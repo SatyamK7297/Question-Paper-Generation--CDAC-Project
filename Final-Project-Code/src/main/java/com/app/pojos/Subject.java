@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,6 +25,7 @@ public class Subject extends BaseEntity {
 	
 	@ManyToOne()
 	@JoinColumn(name="course_id")
+	@JsonIgnore
 	private Course course;
 	
 	@OneToMany(mappedBy="subject",cascade = CascadeType.ALL, orphanRemoval = true)
@@ -52,8 +52,9 @@ public class Subject extends BaseEntity {
 		return questions;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+	public void setQuestions(Question question) {
+		questions.add(question);
+		question.setSubject(this);
 	}
 	
 	

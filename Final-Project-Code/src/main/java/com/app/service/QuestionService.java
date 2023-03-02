@@ -7,6 +7,6 @@ import com.app.pojos.Subject;
 
 public interface QuestionService {
 	
-	public void addQuestion(Subject subject, Question question);
-	public List<Question> getQuestion(Subject subject);
+	public void addQuestion(Long sId, Question question);
+	public List<Question> getQuestion(Long sId);
 }
