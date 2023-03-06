@@ -19,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Course extends BaseEntity{
+public class Course extends BaseEntity {
 
 	@Column(name="Course_name", length=15,nullable=false)
 	private String courseName ;
@@ -28,18 +28,9 @@ public class Course extends BaseEntity{
 	@JsonIgnore
 	private List<Subject> subjects = new ArrayList<Subject>();
 
-	public String getCourseName() {
-		return courseName;
-	}
+	
 
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public List<Subject> getSubjects() {
-		
-		return subjects;
-	}
+	
 
 	public void setSubjects(Subject subject) {
 		subjects.add(subject);

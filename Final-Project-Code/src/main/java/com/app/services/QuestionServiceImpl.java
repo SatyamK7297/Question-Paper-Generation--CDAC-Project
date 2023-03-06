@@ -3,6 +3,9 @@ package com.app.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +40,16 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		Subject subject = subjectRepo.findById(subjectId).orElseThrow(()-> new ResourceNotFoundException("invalid id"));
 		return questionRepo.findBySubject(subject);
+	}
+
+
+
+
+	@Override
+	public List<Question> limitedQuestion(Long subjectId) {
+		//Subject subject = subjectRepo.findById(subjectId).orElseThrow(); 
+		
+		return  questionRepo.limitQuestion(subjectId, PageRequest.of(0, 5));
 	}
 
 }
