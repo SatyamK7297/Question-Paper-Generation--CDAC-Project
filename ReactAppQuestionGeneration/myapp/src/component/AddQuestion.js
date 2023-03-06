@@ -2,6 +2,9 @@ import React from 'react';
 import {useState} from 'react';
 import question_service from '../service/question_service';
 import { Link } from 'react-router-dom';
+import SubjectDetails from './subject';
+import CourseDetails from './course';
+
 function AddQuestion(){
    const [question,SetQuestion]= useState('');
    const[a,SetA]=useState('');
@@ -9,6 +12,19 @@ function AddQuestion(){
    const[c,SetC]=useState('');
    const[d,SetD]=useState('');
    const[answer,SetAnswer]=useState('');
+   const [courseId, setCourseId] = useState();
+   const [subjectId, setSubjectId] = useState();
+
+   let HandleCourseId=(newCourseID)=>{
+    console.log("Course ID came From Course in Generate Question Paper "+newCourseID);
+    setCourseId(newCourseID);
+    
+}
+let HandleSubjectId=(newSubjectId)=>{
+    setSubjectId(newSubjectId);
+    
+}
+
  const saveQuestion =(e)=>{
 
     const questionEntity={
@@ -20,7 +36,7 @@ function AddQuestion(){
         answer
        }
 
-     question_service.addQuestion(questionEntity,1)
+     question_service.addQuestion(questionEntity,subjectId)
                       .then((response)=>{
                         console.log("Question Added Successfully");
                       }).catch((error)=>{
@@ -33,6 +49,8 @@ function AddQuestion(){
     return(<div className='container'>
     <h3>Add Question</h3>
     <hr />
+    <CourseDetails  onCourseIDChange={HandleCourseId} />
+    <SubjectDetails  courseId={courseId} onSubjectIdChange={HandleSubjectId}/>
     <form>
       <div className='form-group'>
         <input

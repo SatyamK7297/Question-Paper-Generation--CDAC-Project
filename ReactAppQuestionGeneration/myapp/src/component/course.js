@@ -4,8 +4,8 @@ import React from "react";
 import SubjectDetails from "./subject";
 
 
-const CourseDetails = () => {
-  const [courseId, setCourseId] = useState(0);
+const CourseDetails = (props) => {
+  const [courseId, setCourseId] = useState();
   const [course, SetCourse] = useState([]);
  
 
@@ -27,7 +27,7 @@ const CourseDetails = () => {
 
     const handleCourseChange = (e) => {
       setCourseId(e.target.value);
-     
+       props.onCourseIDChange(e.target.value);
       console.log("courseID "+courseId)
     };
       return (<div>
@@ -42,7 +42,7 @@ const CourseDetails = () => {
           </option>
         ))}
       </select>
-      <SubjectDetails courseId={courseId}/>
+      
     </div>
   );
 };

@@ -4,7 +4,7 @@ import React from "react";
 import QuestionDisplay from "./question";
 
 const SubjectDetails = (props) => {
-  const [subjectId, setSubjectId] = useState(0);
+  const [subjectId, setSubjectId] = useState();
   const [subject, setSubject] = useState([]);
   console.log(props.courseId);
   const init = () => {
@@ -24,6 +24,7 @@ const SubjectDetails = (props) => {
 
   const handleSubjectChange = (e) => {
     setSubjectId(e.target.value);
+    props.onSubjectIdChange(e.target.value);
 
 
   };
@@ -45,7 +46,7 @@ const SubjectDetails = (props) => {
           </option>
         ))}
       </select>
-      <QuestionDisplay subjectId={subjectId} />
+      
     </div>
   );
 };
