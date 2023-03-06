@@ -1,0 +1,25 @@
+package com.app.pojos;
+
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Subject extends BaseEntity {
+    
+	@Column(name="Subject_Name",length=30)
+	private String subjectName;
+	
+	@ManyToOne
+	@JoinColumn
+	@Column(name="Course_ID")
+	private Course courseId;
+	
+}

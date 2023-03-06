@@ -1,0 +1,11 @@
+package com.app.services;
+
+import com.app.pojos.Course;
+
+public class CourseService {
+
+	
+	void addCourse(Course course);
+	
+	
+}
