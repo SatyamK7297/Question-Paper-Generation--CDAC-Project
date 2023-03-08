@@ -1,7 +1,7 @@
 import subjectService from "../service/subject_service";
 import { useEffect, useState } from "react";
 import React from "react";
-import QuestionDisplay from "./question";
+
 
 const SubjectDetails = (props) => {
   const [subjectId, setSubjectId] = useState();

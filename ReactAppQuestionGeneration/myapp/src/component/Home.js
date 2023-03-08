@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
+import HeroSection from "./headerAndFooter/HeroSection";
 
 function Home(){
-    return(<div>
-
-        <h4>From Home Page</h4>
-    </div>)
+   return (<div>
+   <HeroSection/>
+   </div>)
 }
 export default Home;
