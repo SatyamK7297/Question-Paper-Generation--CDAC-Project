@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.app.custom_exception.QuestionPaperNotFoundException;
-import com.app.dto.UserResponse;
+import com.app.dto.QuestionPaperUserResponse;
 import com.app.entities.ExpiredQuestionPaperBackup;
 import com.app.entities.Question;
 import com.app.entities.QuestionPaper;
@@ -66,15 +65,24 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 	}
 	
 	@Override
-	public Set<QuestionPaper> getQuestionPaperBySubjectForUser(Long subject_id) {
+	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id) {
 		Subject subject = subjectRepo.findById(subject_id).orElseThrow();
-	    return new HashSet<>(questionPaperRepo.findBySubjectAndActiveAndExpired(subject,true,false));
+	    HashSet<QuestionPaper> qp  = new HashSet<>(questionPaperRepo.findBySubjectAndActiveAndExpired(subject,true,false));
+	    HashSet<QuestionPaperUserResponse>  responseQuestionPaper = new HashSet<>();
+	    for(QuestionPaper q : qp) {
+	    	 responseQuestionPaper.add( mapper.map(q, QuestionPaperUserResponse.class));
+	    }
+	    
+	    return responseQuestionPaper;
+	  
+	    
 	}
 
 	@Override
-	public QuestionPaper getQuestionPaper(Long questionPaper_id) {
-		return questionPaperRepo.findById(questionPaper_id).orElseThrow(() -> new QuestionPaperNotFoundException("Question Paper not available for provided id"));
-	}
+	public QuestionPaperUserResponse getQuestionPaper(Long questionPaper_id) {
+		QuestionPaper qp = questionPaperRepo.findById(questionPaper_id).orElseThrow(() -> new QuestionPaperNotFoundException("Question Paper not available for provided id"));
+        return mapper.map(qp, QuestionPaperUserResponse.class);	
+	 }
 
 	@Override
 	public void deleteQuestionPaper(Long questionPaper_id) {
@@ -103,7 +111,7 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 	}
 
 	@Override
-	public QuestionPaper  generateQuestionPaperAuto(Long subject_id,QuestionPaper questionPaper) {
+	public QuestionPaper generateQuestionPaperAuto(Long subject_id,QuestionPaper questionPaper) {
 		
 	  Subject subject = subjectRepo.findById(subject_id).orElseThrow();
 	  Set<Question> questionSet = new LinkedHashSet<Question> (questionRepo.limitQuestion(subject_id, PageRequest.of(0, questionPaper.getNumberOfQuestions())));
@@ -136,6 +144,11 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 		QuestionPaper qp =  questionPaperRepo.findById(questionPaper_id).orElseThrow(() -> new QuestionPaperNotFoundException("Question Paper not available for provided id"));
         qp.setActive(qp.isActive() == true ? false : true);
         return qp.isActive();
+	}
+
+	@Override
+	public QuestionPaper getQuestionPaperById(Long questionPaper_id) {
+		 return questionPaperRepo.findById(questionPaper_id).orElseThrow(() -> new QuestionPaperNotFoundException("Question Paper not available for provided id"));
 	}
 	
 	

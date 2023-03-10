@@ -51,4 +51,12 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(()-> new UserNotFoundException("Wrong Credentials!!!"));
 		return mapper.map(user, UserResponse.class);
 	}
+
+
+	@Override
+	public User getUserByid(Long user_id) {
+		
+	    return userRepo.findById(user_id).orElseThrow(()-> new UserNotFoundException("User not found for provided id"));	
+		
+	}
 }

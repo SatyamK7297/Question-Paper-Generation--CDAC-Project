@@ -3,6 +3,7 @@ package com.app.service;
 import java.util.List;
 import java.util.Set;
 
+import com.app.dto.QuestionResponse;
 import com.app.entities.Question;
 import com.app.entities.QuestionPaper;
 
@@ -17,7 +18,7 @@ public interface QuestionService {
 	
 	public Question getQuestion(Long question_id);
 	
-	public Set<Question> getQuestionOfQuestionPaper(QuestionPaper questionPaper);
+	public Set<QuestionResponse> getQuestionOfQuestionPaperForUser(QuestionPaper questionPaper);
 	
 	public void deleteQuestion(Long question_id);
 

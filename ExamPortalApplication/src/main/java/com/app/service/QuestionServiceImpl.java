@@ -1,14 +1,19 @@
 package com.app.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.QuestionNotFoundException;
+import com.app.dto.QuestionResponse;
 import com.app.entities.Question;
 import com.app.entities.QuestionPaper;
 import com.app.entities.Subject;
@@ -23,6 +28,14 @@ public class QuestionServiceImpl implements QuestionService {
 	private SubjectRepository subjectRepository;
 	@Autowired
 	private QuestionRepository questionRepository;
+	
+	@Autowired
+	private ModelMapper mapper;
+
+	@PostConstruct
+	public void init() {
+		System.out.println("in init " + mapper);
+	}
 	
 	@Override
 	public void addQuestion(Long subject_id, Question question) {
@@ -51,9 +64,15 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Set<Question> getQuestionOfQuestionPaper(QuestionPaper questionPaper) {
+	public Set<QuestionResponse> getQuestionOfQuestionPaperForUser(QuestionPaper questionPaper) {
 	
-		return  questionRepository.findByQuestionPaper(questionPaper);
+		Set<Question> qp =  questionRepository.findByQuestionPaper(questionPaper);
+		   HashSet<QuestionResponse>  responseQuestionPaper = new HashSet<>();
+		    for(Question q : qp) {
+		    	 responseQuestionPaper.add( mapper.map(q, QuestionResponse.class));
+		    }
+		    
+		    return responseQuestionPaper;
 	}
 
 	@Override

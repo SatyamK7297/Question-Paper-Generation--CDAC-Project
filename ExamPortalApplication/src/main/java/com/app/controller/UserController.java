@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,5 +45,10 @@ public class UserController {
 		System.out.println("in user signin " + dto);
 		return ResponseEntity.ok(userService.authenticateUser(dto));
 
+	}
+	
+	@GetMapping("/{user_id}")
+	public ResponseEntity<?> getUserById(@PathVariable Long user_id){
+		return ResponseEntity.ok(userService.getUserByid(user_id));
 	}
 }

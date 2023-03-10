@@ -12,5 +12,7 @@ public interface UserService {
 	public UserResponse authenticateUser(LoginRequestDto dto);
 //	public List<User> getAllUsers();
 	
+	public User getUserByid(Long user_id);
+	
 
 }

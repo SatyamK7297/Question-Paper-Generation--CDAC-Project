@@ -2,7 +2,7 @@ package com.app.service;
 
 import java.util.Set;
 
-
+import com.app.dto.QuestionPaperUserResponse;
 import com.app.entities.QuestionPaper;
 
 public interface QuestionPaperService {
@@ -13,9 +13,9 @@ public interface QuestionPaperService {
 	
 	public Set<QuestionPaper> getQuestionPaperBySubjectForAdmin(Long subject_id);
 	
-	public Set<QuestionPaper> getQuestionPaperBySubjectForUser(Long subject_id);
+	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id);
 
-	public QuestionPaper getQuestionPaper(Long questionPaper_id);
+	public QuestionPaperUserResponse getQuestionPaper(Long questionPaper_id);
 
 	public void  deleteQuestionPaper(Long questionPaper_id);
 	
@@ -26,6 +26,10 @@ public interface QuestionPaperService {
 	public QuestionPaper  generateQuestionPaperAuto(Long subject_id, QuestionPaper questionPaper);
 	
 	public boolean isActive(Long questionPaper_id);
+	
+	public QuestionPaper getQuestionPaperById(Long questionPaper_id);
+	
+	
 	
 	
 }
