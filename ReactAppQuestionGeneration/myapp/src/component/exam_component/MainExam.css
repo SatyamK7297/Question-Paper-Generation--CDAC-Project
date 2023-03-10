@@ -1,0 +1,140 @@
+.main-exam-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .question-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .question-header h2 {
+    margin: 0;
+  }
+  
+  .question-navigation {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .prev-button,
+  .next-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    color: #777;
+  }
+  
+  .prev-button[disabled],
+  .next-button[disabled] {
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  .prev-button svg,
+  .next-button svg {
+    margin-right: 5px;
+  }
+  
+  .prev-button span,
+  .next-button span {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .question-body {
+    margin-bottom: 20px;
+  }
+  
+  .question-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .answer-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .answer-option {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+  
+  .answer-option input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .answer-option label {
+    cursor: pointer;
+  }
+  
+  .answer-option input[type="radio"]:checked + label {
+    font-weight: bold;
+  }
+  
+  .answer-option input[type="radio"]:not(:checked) + label:hover {
+    color: #777;
+  }
+  
+  .response-actions {
+    display: flex;
+    gap: 10px;
+    margin-right: auto;
+  }
+  
+  .clear-response,
+  .mark-review {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+  
+  .clear-response:hover,
+  .mark-review:hover {
+    color: #777;
+  }
+  
+  .question-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .question-info p {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .question-info p:not(:last-child) {
+    margin-right: 20px;
+  }
+  
+  .question-info span {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
