@@ -15,7 +15,7 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 	
 	public List<Question> findBySubject(Subject subject);
 	
-	  @Query("Select q from Question q where q.subject.id=:subjectid order by rand()")
+	  @Query("Select q from Question q where q.questionPaper is null and q.subject.id=:subjectid order by rand() ")
 	  List<Question> limitQuestion(Long subjectid,Pageable pageable);
 		
 	  public Set<Question> findByQuestionPaper(QuestionPaper questionPaper);

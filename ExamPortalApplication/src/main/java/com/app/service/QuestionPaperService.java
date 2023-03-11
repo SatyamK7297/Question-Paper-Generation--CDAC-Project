@@ -13,7 +13,7 @@ public interface QuestionPaperService {
 	
 	public Set<QuestionPaper> getQuestionPaperBySubjectForAdmin(Long subject_id);
 	
-	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id);
+	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id,Long user_id);
 
 	public QuestionPaperUserResponse getQuestionPaper(Long questionPaper_id);
 

@@ -19,13 +19,8 @@ public class UserResponse {
 	private Long id;
 	private String firstName;
 	private String lastName;
-
 	private String email;
-
 	private String phone;
-	private UserRole role;
-    
-
-	
+	private UserRole role;	
 	private Course course;
 }

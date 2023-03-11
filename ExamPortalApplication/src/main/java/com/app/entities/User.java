@@ -1,10 +1,15 @@
 package com.app.entities;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -47,5 +52,10 @@ public class User extends BaseEntity{
 	@JoinColumn(name="course_id")
 	//@JsonIgnore
 	private Course course;
+	
+	
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	private Set<Result> results = new HashSet<>();
 	
 }

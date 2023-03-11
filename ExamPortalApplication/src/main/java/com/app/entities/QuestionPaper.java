@@ -2,18 +2,14 @@ package com.app.entities;
 
 import java.util.HashSet;
 import java.util.Set;
-
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +44,10 @@ public class QuestionPaper extends BaseEntity{
 	//@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToMany(mappedBy="questionPaper", fetch = FetchType.EAGER)
 	private Set<Question> questions = new HashSet<>();
+	
+	@OneToMany(mappedBy="questionPaper",cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	private Set<Result> results = new HashSet<>();
 	
 	public void addQuestion(Question question) {
 		this.questions.add(question);

@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -11,16 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.app.custom_exception.PaperAutoGenerationException;
 import com.app.custom_exception.QuestionPaperNotFoundException;
 import com.app.dto.QuestionPaperUserResponse;
-import com.app.entities.ExpiredQuestionPaperBackup;
 import com.app.entities.Question;
 import com.app.entities.QuestionPaper;
+import com.app.entities.Result;
 import com.app.entities.Subject;
-import com.app.repository.ExpiredQuestionPaperBackupRepository;
+import com.app.entities.User;
 import com.app.repository.QuestionPaperRepository;
 import com.app.repository.QuestionRepository;
+import com.app.repository.ResultRepository;
 import com.app.repository.SubjectRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
@@ -35,9 +40,12 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 	@Autowired
 	private QuestionRepository questionRepo;
 	
-	@Autowired
-	private ExpiredQuestionPaperBackupRepository backupRepo;
-     
+    @Autowired
+    private UserRepository userRepo;
+    
+    @Autowired
+    private ResultRepository resultRepo;
+	
 	@Autowired
 	private ModelMapper mapper;
 
@@ -65,9 +73,23 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 	}
 	
 	@Override
-	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id) {
+	public Set<QuestionPaperUserResponse> getQuestionPaperBySubjectForUser(Long subject_id,Long user_id) {
 		Subject subject = subjectRepo.findById(subject_id).orElseThrow();
+		User user = userRepo.findById(user_id).orElseThrow();
 	    HashSet<QuestionPaper> qp  = new HashSet<>(questionPaperRepo.findBySubjectAndActiveAndExpired(subject,true,false));
+	    
+	    //This is for checking if user has given that quiz already
+	    //so checking from result table 
+	    //fetching all result of user
+	    List<Result> result = resultRepo.findByUser(user);
+	    
+	    //checking to remove those question papers which are are active but already given by user will not be shown to him 
+	    // removing papers which are already given by user
+	    for(Result r : result) {
+	    	qp.remove(r.getQuestionPaper());
+	    }
+	    
+	    
 	    HashSet<QuestionPaperUserResponse>  responseQuestionPaper = new HashSet<>();
 	    for(QuestionPaper q : qp) {
 	    	 responseQuestionPaper.add( mapper.map(q, QuestionPaperUserResponse.class));
@@ -115,6 +137,8 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
 		
 	  Subject subject = subjectRepo.findById(subject_id).orElseThrow();
 	  Set<Question> questionSet = new LinkedHashSet<Question> (questionRepo.limitQuestion(subject_id, PageRequest.of(0, questionPaper.getNumberOfQuestions())));
+	  if(questionSet.size() < questionPaper.getNumberOfQuestions())
+		  throw new PaperAutoGenerationException("Insufficent Questions available in database Auto Generation Failed");
 	  for(Question q : questionSet) {
 		  questionPaper.addQuestion(q);
 	  }
@@ -132,10 +156,9 @@ public class QuestionPaperServiceImpl implements QuestionPaperService{
         
         
 		for(Question q : questionSet) {
-			 ExpiredQuestionPaperBackup ex = mapper.map(q, ExpiredQuestionPaperBackup.class);
-			 backupRepo.save(ex);
 			q.setQuestionPaper(null);
 		}
+		qp.setQuestions(null);
 		
 	}
 

@@ -16,8 +16,6 @@ import lombok.ToString;
 public class QuestionPaperUserResponse {
 	private Long id;
     private String title;
-	
 	private String description;
-	
 	private int numberOfQuestions;
 }
