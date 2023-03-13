@@ -1,0 +1,79 @@
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .result-heading {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .result-subheading {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .result-score {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .result-attempted {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .result-total-marks {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .result-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .result-print-button {
+    background-color: #008080;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .result-print-button:hover {
+    background-color: #005c5c;
+  }
+  
+  .result-logout-button {
+    background-color: #e60000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .result-logout-button:hover {
+    background-color: #b30000;
+  }
+  
